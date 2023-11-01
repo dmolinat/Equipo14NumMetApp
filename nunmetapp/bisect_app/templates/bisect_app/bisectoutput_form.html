@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'bisectoutputs'%}">&#8592; Back</a>
+</div>
+<div class="card-body">
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="button" type="submit" value="Submit">
+    </form>
+</div>
+<div class="ftrtxt">
+    <p>&#9886; by mahnazmh &#9887;</p>
+</div>
+{% endblock content %}

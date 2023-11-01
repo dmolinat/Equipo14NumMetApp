@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="header-bar">
+    <a href="{% url 'bisectoutputs'%}">&#8592; Go Back</a>
+</div>
+
+<div class="card-body">
+    <form method="post" action="">
+        {% csrf_token %}
+        <p>¿Estas seguro de que deseas eliminar este resultado? "{{bisectoutputs}}"</p>
+        
+        <input class="button" type="submit" value="Delete">
+    </form>
+</div>
+<div class="ftrtxt">
+    <p>&#9886; by mahnazmh &#9887;</p>
+</div>
+{% endblock content %}

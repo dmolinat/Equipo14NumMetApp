@@ -1,0 +1,21 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Configuracion Famas Game</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/styles/s2.css' %}">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li > <a href="{% url 'login' %}"> Login </a></li>
+                <li > <a href="{% url 'logout' %}"> Logout </a></li>
+                <li > <a href="{% url 'bisectoutputs' %}"> Bisect </a></li>
+            </ul>
+        </nav>
+    </body>
+</html>

@@ -5,17 +5,44 @@ from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import BisectOutput
+from .utils.bisect import bisect
 
 class BisectOutputCreate(LoginRequiredMixin, CreateView):
     model = BisectOutput
-    fields = ['f_s', 'root', 'err','froot']
+    fields = ['f_s', 'a', 'b','tolerance']
     success_url = reverse_lazy('home')
-
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(BisectOutputCreate, self).form_valid(form)
+        
+        f_s = form.cleaned_data['f_s']        
+        a = int(form.cleaned_data['a'])
+        b = int(form.cleaned_data['b'])
+        tolerance= float(form.cleaned_data['tolerance'])
+        
+        # Realiza el cálculo bisect aquí y obtén los resultados
+        (root, err, froot) = bisect(f_s,a,b,tolerance)
+
+        # Crea una instancia de BisectOutput con los resultados y otros datos necesarios
+        bisect_output = BisectOutput(
+            user=self.request.user,
+                a=a,
+                b=b,
+                f_s=f_s,
+                tolerance=tolerance,
+                root=root,
+                err=err,
+                froot=froot
+        )
+        bisect_output.save()
+        return redirect('bisectoutputs')
+
+class BisectOutputUpdate(LoginRequiredMixin, UpdateView):
+    model = BisectOutput
+    fields = ['f_s', 'a', 'b','tolerance']
+    success_url = reverse_lazy('bisectoutputs')
 
 class BisectOutputDelete(LoginRequiredMixin, DeleteView):
     model = BisectOutput
@@ -29,7 +56,7 @@ class BisectOutputList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['bisectoutputs'] = context['bisectoutputs'].filter(user=self.request.user)
+        context['bisectoutputs'] = list(context['bisectoutputs'].filter(user=self.request.user))[::-1]
         
         search_input = self.request.GET.get('search-area') or ''
         if search_input:

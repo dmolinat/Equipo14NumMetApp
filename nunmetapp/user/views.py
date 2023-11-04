@@ -8,7 +8,6 @@ from django.contrib.auth import login
 from django.shortcuts import render
 
 def home(request):
-    
     return render(request, 'index.html')
 
 class CustomLoginView(LoginView):

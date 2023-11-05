@@ -2,11 +2,11 @@
 {% block content %}
 
 <div class="header-bar">
-    <a href="{% url 'home'%}">&#8592; Back</a>
+    <a href="{% url 'home' %}">&#8592; Back</a>
 </div>
 <div class="card-body">
     <form method="post" action="">
-        {% csrf_token %}
+        {% csrf_token %}    
         {{ form.as_p }}
         <input class="button" type="submit" value="Submit">
     </form>

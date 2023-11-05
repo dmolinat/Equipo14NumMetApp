@@ -14,20 +14,17 @@
 
 </div>
 
-<div id="search-add-wrapper">
-    <a id="add-link" href="{% url 'bisectoutput-create' %}">&#43;</a>
 
-</div>
 
 
 <div class="task-items-wrapper">
-    {% for bisectoutput in bisectoutputs %}
+    {% for jacobi in jacobis %}
         <div class="task-wrapper">
             <div class="task-title">
                 <div class="task-incomplete-icon"></div>
-                <a>{{bisectoutput}}</a>
+                <a>{{jacobi}}</a>
             </div>
-             <a class="delete-link" href="{% url 'bisectoutput-delete' bisectoutput.id %}">&#215;</a>
+             <a class="delete-link" href="{% url 'jacobi-delete' jacobi.id %}">&#215;</a>
         </div>
     {% empty %}
     <h3> No Numerical Method History </h3>

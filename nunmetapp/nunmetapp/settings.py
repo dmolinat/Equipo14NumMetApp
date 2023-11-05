@@ -26,7 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bisect_app',
-    'user'
+    'user',
+    'methods_app',
+    'boolerl_app',
+    'jacobi'
 ]
 
 MIDDLEWARE = [

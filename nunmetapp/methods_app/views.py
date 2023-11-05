@@ -1,6 +1,8 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 from .models import NumericalMethod
 
@@ -20,7 +22,12 @@ class MethodsList(LoginRequiredMixin, ListView):
                 date__startswith=search_input)
         return context
 
-class methodsDetail(LoginRequiredMixin, DetailView):
+class MethodsDelete(LoginRequiredMixin, DeleteView):
+    model = NumericalMethod
+    fields = '__all__'
+    success_url = reverse_lazy('home')
+    
+class MethodsDetail(LoginRequiredMixin, DetailView):
     model = MethodsList
     context_object_name ='methodslist'
     template_name = 'base/methods.html'

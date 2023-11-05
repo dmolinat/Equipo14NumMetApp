@@ -15,8 +15,9 @@ class BisectOutput(models.Model):
     root=models.FloatField(default=0, null=True)
     err=models.FloatField(default=0, null=True)
     froot=models.FloatField(default=0, null=True)
+    kind=models.CharField(max_length=200,default="BISECT", null=False)
     
     date_use=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"BISECT - function: {self.f_s} - a: {self.a} - b: {self.b} - tolerance: {self.tolerance} - ROOT: {str(self.root)}"
+        return f"kind: {self.kind} - function: {self.f_s} - a: {self.a} - b: {self.b} - M: {self.M} - Aprox: {str(self.aprox)}"

@@ -1,5 +1,5 @@
 body{
-    background-color: #FAFAFA;
+    background-color: #b6aeae;
     font-family: 'Nunito', sans-serif;
     padding-top: 50px;
 }
@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container{
-    max-width: 550px;
+    max-width: 700px;
     margin: auto;
     background-color: #fff;
     -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.12);
@@ -40,23 +40,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 .task-title a {
     text-decoration: none;
-    color: rgb(65,105,225);
+    color: rgb(0, 0, 0);
     margin-left: 10px;
 }
 .task-complete-icon {
-    
     height: 20px;
     width: 20px;
     background-color: rgb(162, 209, 162);
     border-radius: 50%;
-    
-
 }
 
 .task-incomplete-icon {
     height: 20px;
     width: 20px;
-    background-color: rgb(25,25,112);
+    background-color: rgb(14, 14, 19);
     border-radius: 50%;
 }
 .delete-link {

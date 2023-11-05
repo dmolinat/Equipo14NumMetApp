@@ -7,7 +7,7 @@ def bisect(f_s, a, b, delta):
     err = 0;
     yc = 0;
     if  (ya*yb > 0):
-        return
+        return (np.finfo(np.float64).eps, np.finfo(np.float64).eps, np.finfo(np.float64).eps, "BISECT: No satisface que TVI: f(a)*f(b)>0")
     max1 = 1 + round((np.log(b-a) - np.log(delta)) / np.log(2));
     for k in range(1,max1+1):
         c = (a + b) / 2;
@@ -26,7 +26,7 @@ def bisect(f_s, a, b, delta):
     c = (a + b) / 2;
     err = abs(b - a);
     yc = f(c);
-    return (c, err, yc)
+    return (c, err, yc, "BISECT")
     
 #f=lambda x: (np.exp(-2*x))/(np.tan(x))
 #bisect(f,4,5,1e-10)

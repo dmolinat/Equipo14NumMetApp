@@ -1,0 +1,20 @@
+.task-wrapper {
+    background-color: #F0F0F0; /* Cambia el color de fondo al que desees */
+    padding: 30px; /* Ajusta el relleno según tus preferencias */
+    border: 1px solid #0c0808; /* Agrega un borde alrededor del icono */
+    border-radius: 5px; /* Para darle esquinas redondeadas */
+    display: inline-flex; /* Para que el icono esté en línea con el texto */
+}
+
+.inputs, .outputs, .date_use {
+    color: #00000028; /* Cambia el color del texto al que desees */
+    font-family: Arial, sans-serif; /* Cambia la fuente al que desees */
+    font-size: 14px; /* Cambia el tamaño de fuente al que desees */
+}
+
+.delete-link {
+    font-weight: 1000;
+    color: #09090a;
+    font-size: 30px;
+    line-height: 0;
+}

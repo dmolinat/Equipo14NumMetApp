@@ -9,7 +9,7 @@ def boolerl(f_s, a, b, M):
     
     f=lambda x: eval(f_s)
     if M % 4 != 0:
-        return (np.nan, "BOOLER: M must be multiple of 4.")
+        return (np.finfo(np.float64).eps, "BOOLER: M must be multiple of 4.")
     else:
         AproxNum = 0
         h = (b - a) / M

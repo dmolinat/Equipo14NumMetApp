@@ -7,13 +7,13 @@ class BoolerlOutput(models.Model):
     
     #Inputs
     f_s=models.CharField(max_length=200, null=False)    
-    a=models.IntegerField(default=0,null=False)
-    b=models.IntegerField(default=1,null=False)
+    a=models.FloatField(default=0,null=False)
+    b=models.FloatField(default=1,null=False)
     M=models.BigIntegerField(default=4,null=False)
     
     #Outputs
-    aprox=models.FloatField(default=0,null=False)
-    kind=models.CharField(default="BOOLERL", null=False)
+    aprox=models.FloatField(default=0,null=True)
+    kind=models.CharField(max_length=200,default="BOOLERL", null=False)
     
     def __str__(self):
         return f"kind: {self.kind} - function: {self.f_s} - a: {self.a} - b: {self.b} - M: {self.M} - Aprox: {str(self.aprox)}"

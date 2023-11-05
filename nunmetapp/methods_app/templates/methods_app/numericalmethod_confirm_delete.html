@@ -1,14 +1,15 @@
 {% extends 'main.html' %}
 {% block content %}
-
 <div class="header-bar">
-    <a href="{% url 'home'%}">&#8592; Back</a>
+    <a href="{% url 'home'%}">&#8592; Go Back</a>
 </div>
+
 <div class="card-body">
     <form method="post" action="">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input class="button" type="submit" value="Submit">
+        <p>¿Estas seguro de que deseas eliminar este resultado? "{{methods}}"</p>
+        
+        <input class="button" type="submit" value="Delete">
     </form>
 </div>
 <div class="ftrtxt">

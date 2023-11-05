@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .models import BisectOutput
 from .utils.bisect import bisect
+from methods_app.models import NumericalMethod
 
 class BisectOutputCreate(LoginRequiredMixin, CreateView):
     model = BisectOutput
@@ -23,7 +24,7 @@ class BisectOutputCreate(LoginRequiredMixin, CreateView):
         tolerance= float(form.cleaned_data['tolerance'])
         
         # Realiza el cálculo bisect aquí y obtén los resultados
-        (root, err, froot) = bisect(f_s,a,b,tolerance)
+        (root, err, froot, kind) = bisect(f_s,a,b,tolerance)
 
         # Crea una instancia de BisectOutput con los resultados y otros datos necesarios
         bisect_output = BisectOutput(
@@ -34,22 +35,29 @@ class BisectOutputCreate(LoginRequiredMixin, CreateView):
                 tolerance=tolerance,
                 root=root,
                 err=err,
-                froot=froot
+                froot=froot,
+                kind=kind,
         )
         bisect_output.save()
-        return redirect('bisectoutputs')
+        methods=NumericalMethod(
+            user=self.request.user,
+            inputs={
+                "f_s":f_s,
+                "a":a,
+                "b":b,
+                "tolerance":tolerance
+            },
+            outputs={
+                "root":root,
+                "err": err,
+                "froot":froot,
+                "kind": kind,
+            },
+            kind="BISECT",
+        )
+        methods.save()
+        return redirect('home')
 
-class BisectOutputUpdate(LoginRequiredMixin, UpdateView):
-    model = BisectOutput
-    fields = ['f_s', 'a', 'b','tolerance']
-    success_url = reverse_lazy('bisectoutputs')
-
-class BisectOutputDelete(LoginRequiredMixin, DeleteView):
-    model = BisectOutput
-    fields = '__all__'
-    success_url = reverse_lazy('home')
-    
-"""Vistas para los elementos de BisectOutput"""
 class BisectOutputList(LoginRequiredMixin, ListView):
     model = BisectOutput
     context_object_name ='bisectoutputs'
@@ -57,14 +65,4 @@ class BisectOutputList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['bisectoutputs'] = list(context['bisectoutputs'].filter(user=self.request.user))[::-1]
-        
-        search_input = self.request.GET.get('search-area') or ''
-        if search_input:
-            context['bisectoutputs'] = context['bisectoutputs'].filter(
-                date__startswith=search_input)
         return context
-
-class BisectOutputDetail(LoginRequiredMixin, DetailView):
-    model = BisectOutput
-    context_object_name ='bisectoutput'
-    template_name = 'base/bisectoutput.html'

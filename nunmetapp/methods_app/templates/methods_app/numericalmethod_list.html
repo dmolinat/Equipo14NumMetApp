@@ -38,7 +38,18 @@
                 <div class="task-wrapper">
                     <div class="task-title">
                         <div class="task-incomplete-icon"></div>
+                        
+                        {% if method.isBisect %}
+                        <a class="inputs" href="{% url 'bisectoutput-update' method.bisect.id %}">{{method.inputs}}</a>
+                        {% elif method.isBoolerl %}
+                        <a class="inputs" href="{% url 'boolerloutput-update' method.boolerl.id %}">{{method.inputs}}</a>
+                        {% elif method.isJacobi %}
+                        <a class="inputs" href="{% url 'jacobi-update' method.jacobi.id %}">{{method.inputs}}</a>
+                        {% else %}
                         <a class="inputs">{{method.inputs}}</a>
+                        {% endif %}
+
+
                         <a class="outputs">{{method.outputs}}</a>
                         <a class="date_use">{{method.date_use}}</a>
                     </div>
@@ -50,7 +61,7 @@
         </div>
         
         <div class="ftrtxt">
-            <p>&#9886; by mahnazmh &#9887;</p>
+            <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot&#9887;</p>
         </div>
     </body>
 </html>

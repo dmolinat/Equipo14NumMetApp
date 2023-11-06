@@ -18,7 +18,5 @@ class Jacobi(models.Model):
     err=models.FloatField(default=0, null=True)
     kind=models.CharField(max_length=200,default="JACOBI", null=False)
     
-    date_use=models.DateTimeField(auto_now_add=True)
-    
     def __str__(self):
         return f"kind: {self.kind} - A: {self.A} - B: {self.B} - X: {self.X} - Max_Iteration: {self.number_iteration} - error: {str(self.err)}"

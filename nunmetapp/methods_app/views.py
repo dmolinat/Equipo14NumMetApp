@@ -11,6 +11,7 @@ from .models import NumericalMethod
 class MethodsList(LoginRequiredMixin, ListView):
     model = NumericalMethod
     context_object_name ='methods'
+    ordering = ['date_use']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,8 +27,3 @@ class MethodsDelete(LoginRequiredMixin, DeleteView):
     model = NumericalMethod
     fields = '__all__'
     success_url = reverse_lazy('home')
-    
-class MethodsDetail(LoginRequiredMixin, DetailView):
-    model = MethodsList
-    context_object_name ='methodslist'
-    template_name = 'base/methods.html'

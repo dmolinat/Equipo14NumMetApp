@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from .models import BoolerlOutput
 from methods_app.models import NumericalMethod
 from .utils.boolerl import boolerl
-
+import datetime
 
 class BoolerlOutputCreate(LoginRequiredMixin, CreateView):
     model = BoolerlOutput
@@ -51,6 +51,8 @@ class BoolerlOutputCreate(LoginRequiredMixin, CreateView):
                 "kind":kind
             },
             kind="BOOLERL",
+            boolerl=boolerl_output,
+            date_use=datetime.datetime.today()
         )
         methods.save()
         return redirect('home')
@@ -68,3 +70,44 @@ class BoolerlOutputList(LoginRequiredMixin, ListView):
             context['boolerloutputs'] = context['boolerloutputs'].filter(
                 date__startswith=search_input)
         return context
+
+class BoolerlOutputUpdate(LoginRequiredMixin, UpdateView):
+    model = BoolerlOutput
+    fields = ['f_s', 'a', 'b','M']
+    success_url = reverse_lazy('home')
+    
+    def form_valid(self, form):
+        boolerl_id=self.object.id
+        boolerl_output=BoolerlOutput.objects.get(id=boolerl_id)
+        
+        f_s = form.cleaned_data['f_s']        
+        a = int(form.cleaned_data['a'])
+        b = int(form.cleaned_data['b'])
+        M = int(form.cleaned_data['M'])
+        
+        # Realiza el cálculo boolerl aquí y obtén los resultados
+        (aprox, kind) = boolerl(f_s,a,b,M)
+        
+        boolerl_output.f_s=f_s
+        boolerl_output.a=a
+        boolerl_output.b=b
+        boolerl_output.M=M
+        boolerl_output.aprox=aprox
+        boolerl_output.kind=kind
+        
+        boolerl_output.save()
+        method_updated=NumericalMethod.objects.get(boolerl=boolerl_id)
+        method_updated.inputs={
+                "f_s":f_s,
+                "a":a,
+                "b":b,
+                "M":M
+            }
+        method_updated.outputs={
+            "aprox":aprox,
+            "kind":kind
+            }
+        method_updated.kind=kind
+        method_updated.date_use=datetime.datetime.today()
+        method_updated.save()
+        return redirect('home')        

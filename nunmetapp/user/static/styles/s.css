@@ -8,6 +8,12 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
 }
 
+.inputs{
+    color: rgb(19, 78, 19); /* Cambia el color del texto al que desees */
+    font-family: sans-serif; /* Cambia la fuente al que desees */
+    font-size: 18px; /* Cambia el tamaño de fuente al que desees */
+}
+
 .container{
     max-width: 700px;
     margin: auto;

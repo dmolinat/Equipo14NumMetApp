@@ -6,10 +6,16 @@
     display: inline-flex; /* Para que el icono esté en línea con el texto */
 }
 
-.inputs, .outputs, .date_use {
+.outputs, .date_use {
     color: #00000028; /* Cambia el color del texto al que desees */
     font-family: Arial, sans-serif; /* Cambia la fuente al que desees */
     font-size: 14px; /* Cambia el tamaño de fuente al que desees */
+}
+
+.inputs{
+    color: rgb(19, 78, 19); /* Cambia el color del texto al que desees */
+    font-family: sans-serif; /* Cambia la fuente al que desees */
+    font-size: 18px; /* Cambia el tamaño de fuente al que desees */
 }
 
 .delete-link {

@@ -20,4 +20,4 @@ def jacobi(A, B, x0, tol, max_iter):
         
         return (str(x),k,err,"JACOBI")
     except:
-        return (str(np.zeros(1)),-1,np.finfo(np.float64).eps,"JACOBI-ERROR: Matrix A or Vectors B,x0 invalid.")
+        return (str(np.zeros(1)),-1,np.finfo(np.float64).eps,"JACOBI-ERROR: Matrix A or Vectors B, x0 or params is not valid.")

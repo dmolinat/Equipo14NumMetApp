@@ -20,8 +20,8 @@ class BoolerlOutputCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         
         f_s = form.cleaned_data['f_s']        
-        a = int(form.cleaned_data['a'])
-        b = int(form.cleaned_data['b'])
+        a = float(form.cleaned_data['a'])
+        b = float(form.cleaned_data['b'])
         M= int(form.cleaned_data['M'])
         
         # Realiza el cálculo boolerl aquí y obtén los resultados
@@ -81,8 +81,8 @@ class BoolerlOutputUpdate(LoginRequiredMixin, UpdateView):
         boolerl_output=BoolerlOutput.objects.get(id=boolerl_id)
         
         f_s = form.cleaned_data['f_s']        
-        a = int(form.cleaned_data['a'])
-        b = int(form.cleaned_data['b'])
+        a = float(form.cleaned_data['a'])
+        b = float(form.cleaned_data['b'])
         M = int(form.cleaned_data['M'])
         
         # Realiza el cálculo boolerl aquí y obtén los resultados

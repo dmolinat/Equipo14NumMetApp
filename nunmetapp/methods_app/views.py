@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.shortcuts import render
 
 from .models import NumericalMethod
 
@@ -27,3 +28,6 @@ class MethodsDelete(LoginRequiredMixin, DeleteView):
     model = NumericalMethod
     fields = '__all__'
     success_url = reverse_lazy('home')
+    
+def HelpMethods(request):
+    return render(request, 'methods_app/help.html')

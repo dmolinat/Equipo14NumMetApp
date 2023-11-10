@@ -1,17 +1,53 @@
 {% extends 'main.html' %}
 {% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boole</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+</head>
+<body>
+    <div class="header-bar">
+        <h1>Booler</h1>
+        <a href="{% url 'home'%}">&#8592; Back</a>
+    </div>
 
-<div class="header-bar">
-    <a href="{% url 'home'%}">&#8592; Back</a>
-</div>
-<div class="card-body">
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input class="button" type="submit" value="Submit">
-    </form>
-</div>
-<div class="ftrtxt">
-    <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot&#9887;</p>
-</div>
+    <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
+
+
+    <div class="card-body">
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="button" type="submit" value="Submit">
+        </form>
+    </div>
+    
+    <div>
+        <b>THEORY.</b>
+        <p>Remember the boole integration method. Let \(h=\cfrac{b-a}{4}\) and \(M=4\):</p>
+        \[\int_{x=x_0}^{x=x_4} f(x) \approx \cfrac{2h}{45} [7f(x_0) + 32f(x_1) + 12f(x_2)+ 7f(x_4)] \cdot dx\]
+        <p>So, we propose a extention about this simple method. We named Boolerl at the Compound Boole Method. Let \(M\) a natural number multiple of 4 and \(h=\cfrac{b-a}{M}\):</p>
+        \[\int_{a}^{b} f(x) \approx \cfrac{2h}{45} [ 7f(x_0)+ 32 \sum_{i=1}^{M/4}f(x_{4i-3})+ 12 \sum_{i=1}^{M/4}f(x_{4i-2}) + 14 \sum_{i=1}^{M/4-1}f(x_{4i}) +7f(x_M)] \]
+        <p>Remember the converge order with Big Oh notation is \(O(h^{6})\).</p>
+    </div>
+    <div>
+        <b>PARAMS.</b>     
+        <ul>
+             <li><b>F_s: </b>Function \(f\) to calculus integral aproximation.</li>
+             <li><b>A: </b>Lower limit in [<b>a</b>,b].</li>
+             <li><b>B: </b>Upper limit in [a,<b>b</b>].</li>
+             <li><b>M: </b>Number of intervals. <b>REMMEMBER: This number must be multiple of 4.</b></li>
+         </ul>
+    </div>
+
+    <div class="ftrtxt">
+        <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya &#9887;</p>
+    </div>
+
+</body>
+</html>
+
+
+
 {% endblock content %}

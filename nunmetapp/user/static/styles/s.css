@@ -1,7 +1,7 @@
 body{
     background-color: #b6aeae;
     font-family: 'Nunito', sans-serif;
-    padding-top: 50px;
+    padding-top: 100px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container{
-    max-width: 700px;
+    max-width: 750px;
     margin: auto;
     background-color: #fff;
     -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.12);
@@ -75,7 +75,9 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    font-size: small;
 }
+
 #add-link {
     color: (#B2B5E0);
     text-decoration: none;

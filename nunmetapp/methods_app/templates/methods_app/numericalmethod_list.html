@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Configuracion Famas Game</title>
+        <title>UNMetApp</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static '/styles/home.css' %}">
@@ -24,13 +24,14 @@
             {% else %}
             <a href="{% url 'login'  %}">Login</a>
         {% endif %}
-        
         </div>
-        
+        <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
+
         <div id="search-add-wrapper">
             <a id="add-link" href="{% url 'bisectoutput-create' %}">Bisect</a>
             <a id="add-link" href="{% url 'boolerloutput-create' %}">Boolerl</a>
             <a id="add-link" href="{% url 'jacobi-create' %}">Jacobi</a>
+            <a id="add-link" href="{% url 'rk4-create' %}">RK4</a>
         </div>
         
         <div class="task-items-wrapper">
@@ -45,11 +46,9 @@
                         <a class="inputs" href="{% url 'boolerloutput-update' method.boolerl.id %}">{{method.inputs}}</a>
                         {% elif method.isJacobi %}
                         <a class="inputs" href="{% url 'jacobi-update' method.jacobi.id %}">{{method.inputs}}</a>
-                        {% else %}
-                        <a class="inputs">{{method.inputs}}</a>
+                        {% elif method.isRK4 %}
+                        <a class="inputs" href="{% url 'rk4-update' method.rk4.id %}">{{method.inputs}}</a>
                         {% endif %}
-
-
                         <a class="outputs">{{method.outputs}}</a>
                         <a class="date_use">{{method.date_use}}</a>
                     </div>
@@ -61,7 +60,7 @@
         </div>
         
         <div class="ftrtxt">
-            <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot&#9887;</p>
+            <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya &#9887;</p>
         </div>
     </body>
 </html>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from bisect_app.models import BisectOutput
 from jacobi.models import Jacobi
 from boolerl_app.models import BoolerlOutput
+from rk4.models import Rk4
 
 class NumericalMethod(models.Model):
     user = models.ForeignKey(
@@ -26,10 +27,9 @@ class NumericalMethod(models.Model):
         Jacobi, on_delete=models.CASCADE, null=True, blank=True
     )
     
-    #rk4 = models.ForeignKey(
-    #    RK4, on_delete=models.CASCADE, null=True, blank=True
-    #) 
-    
+    rk4 = models.ForeignKey(
+        Rk4, on_delete=models.CASCADE, null=True, blank=True
+    ) 
         
     date_use=models.DateTimeField(null=True)
     def __str__(self):

@@ -1,17 +1,69 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div class="header-bar">
-    <a href="{% url 'home' %}">&#8592; Back</a>
-</div>
-<div class="card-body">
-    <form method="post" action="">
-        {% csrf_token %}    
-        {{ form.as_p }}
-        <input class="button" type="submit" value="Submit">
-    </form>
-</div>
-<div class="ftrtxt">
-    <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot&#9887;</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jacobi</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+</head>
+<body>
+    <div class="header-bar">
+        <h1>Jacobi</h1>
+        <a href="{% url 'home' %}">&#8592; Back</a>
+    </div>
+
+    <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
+
+    <div class="card-body">
+        <form method="post" action="">
+            {% csrf_token %}    
+            {{ form.as_p }}
+            <input class="button" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div className="help-jacobi">
+        <div>
+            <b>THEORY</b>.
+            This method have some conditions: 
+
+            For the solution of the system \(\textbf{Ax}=\textbf{b}\) (equivalent to the solution of the system \(x=\textbf{T} x + \textbf{c}\), to use the Jacobi Method, it is necessary to decompose the matrix \(A\) in: \(D\) diagonal matrix, \(L\) lower triangular matrix, \(U\) upper triangular matrix such that \(\textbf{A}=\textbf{D}-\textbf{L}-\textbf{U}\):
+
+            <ul>
+                <li>The sequence \(\textbf{x}^{(1)}\), \(\textbf{x}^{(2)}\), \(\textbf{x}^{(3)}\), ... , deﬁned by the iteration \(\textbf{x}^{(k+1)}= \textbf{T} \textbf{x}^{(k)} + \textbf{c}\) with \(k=0,1,2,...,\) converges to the unique solution of the system \(x=\textbf{T} x + \textbf{c} \) for all initial approximation \(\textbf{x}^{(0)}\) \(\in\) \(R^{n}\) if and only if \(\rho\) \(\left( \textbf{T} \right)\) \( < 1\).
+
+                <li>\( \Downarrow \) </li>
+
+                <li>If \(|||T|| < 1\) for some natural or induced matrix norm and \(\textbf{c}\) is any vector, it is satisfied that: \( ||\textbf{x}^{(k)} - \textbf{x}|| \leq ||\textbf{T}||^{k} || \textbf{x}^{(0)}-\textbf{x}|| \)</li>
+
+                <li>\( \textbf{T}_j := \textbf{D}^{-1} (\textbf{L}+\textbf{U}) \)</li>
+                <li>\( \textbf{c}_j := \textbf{D}^{-1}\textbf{b} \)</li>
+                <li>\( \Downarrow \)</li>
+                <li>\(  \textbf{x}^{(k+1)}= \textbf{T}_j \textbf{x}^{(k)}+\textbf{c} _j \)</li>
+            </ul>
+        </div>
+
+        <div>
+            <b>PARAMS.</b>
+            Remember that we want resolve the next equation system: \(A x = B\). So, Let \(A \in M^{n x n}\) and \(X0, B \in R^{n}\):
+            <ul>
+                <li><b>A: </b>Matrix of coefficients of the system of equations.</li>
+                <li><b>B: </b>Right hand side vector or vector of constants.</li>
+                <li><b>X0: </b>Initial vector to perform the Jacobi iteration.</li>
+                <li><b>Tolerance: </b>Approximation accuracy figures or stopping Jacobi.</li>
+                <li><b>Max_iter: </b>Maximum number of iteration.</li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <div class="ftrtxt">
+        <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya &#9887;</p>
+    </div>
+
+</body>
+</html>
+
+
 {% endblock content %}

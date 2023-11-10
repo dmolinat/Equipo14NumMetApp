@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'user',
     'methods_app',
     'boolerl_app',
-    'jacobi'
+    'jacobi',
+    'rk4'
 ]
 
 MIDDLEWARE = [

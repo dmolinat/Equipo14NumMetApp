@@ -4,6 +4,27 @@
     border: 1px solid #0c0808; /* Agrega un borde alrededor del icono */
     border-radius: 5px; /* Para darle esquinas redondeadas */
     display: inline-flex; /* Para que el icono esté en línea con el texto */
+    color: black;
+}
+
+.task-items-wrapper{
+    color:black;
+    font-size: 18px;
+}
+
+#add-link {
+    color: (#b2e0ba);
+    text-decoration: none;
+    font-size: 24px;
+    text-shadow: 1px 1px #94f39c;
+}
+
+.container{
+    max-width: 850px;
+    margin: auto;
+    background-color: #fff;
+    -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.12);
+    box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.12);
 }
 
 .outputs, .date_use {

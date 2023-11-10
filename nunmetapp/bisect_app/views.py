@@ -10,6 +10,8 @@ from .models import BisectOutput
 from .utils.bisect import bisect
 from methods_app.models import NumericalMethod
 import datetime
+from django.shortcuts import render
+
 
 class BisectOutputCreate(LoginRequiredMixin, CreateView):
     model = BisectOutput
@@ -115,3 +117,11 @@ class BisectOutputUpdate(LoginRequiredMixin, UpdateView):
         method_updated.save()
         return redirect('home')
         
+def help_buttom_bisect(request):
+    show_message = request.session.get('show_message', False)
+    if request.method == 'POST':
+        # Cambia el estado del mensaje en función de su estado actual
+        show_message = not show_message
+        request.session['show_message'] = show_message
+            
+    return render(request, 'bisect_app/hello_world.html', {'show_message': show_message})

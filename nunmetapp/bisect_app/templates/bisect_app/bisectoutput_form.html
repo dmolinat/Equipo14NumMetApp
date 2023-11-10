@@ -1,17 +1,53 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div class="header-bar">
-    <a href="{% url 'home'%}">&#8592; Back</a>
-</div>
-<div class="card-body">
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input class="button" type="submit" value="Submit">
-    </form>
-</div>
-<div class="ftrtxt">
-    <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot &#9887;</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bisect</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+</head>
+<body>
+    <div class="header-bar">
+        <h1>Bisect</h1>
+        <a href="{% url 'home'%}">&#8592; Back</a>
+    </div>
+
+    <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
+
+    <div class="card-body">
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="button" type="submit" value="Submit">
+        </form>       
+    </div>
+
+    <div>
+        <b>THEORY.</b>
+        This method have some conditions: 
+        <ul>
+             <li>\(f\) continuous in \([a, b]\).</li>
+             <li>(Intermediate Value Theorem): \(f(a)\)*\(f(b)\) \(\leq\) \(0\).</li>
+             <li>There is only one root in \([a,b]\).</li>
+         </ul>
+    </div>
+
+    <div>
+        <b>PARAMS.</b>     
+        <ul>
+             <li><b>F_s: </b>Function \(f\) to bisect.</li>
+             <li><b>A: </b>Lower limit to bisect in [<b>a</b>,b].</li>
+             <li><b>B: </b>Upper limit to bisect in [a,<b>b</b>].</li>
+             <li><b>Tolerance: </b>Approximation accuracy figures or stopping bisect.</li>
+         </ul>
+    </div>
+    <div class="ftrtxt">
+        <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya &#9887;</p>
+    </div>
+
+</body>
+</html>
+
+
 {% endblock content %}

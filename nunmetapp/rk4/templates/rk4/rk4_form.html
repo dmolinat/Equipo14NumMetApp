@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Runge-Kutta 4</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+</head>
+<body>
+    <div class="header-bar">
+        <h1>Runge-Kutta 4</h1>
+        <a href="{% url 'home' %}">&#8592; Back</a>
+    </div>
+    <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
+    <div class="card-body">
+        <form method="post" action="">
+            {% csrf_token %}    
+            {{ form.as_p }}
+            <input class="button" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div className="help-rk4">
+        <div>
+            <b>THEORY</b>.
+            This method have some conditions: 
+
+            <p>Runge-Kutta methods are built on Taylor's methods but with the advantage that they do not require the evaluation of the derivatives of the function \(f\), since instead, at each step, the function is evaluated at several speciﬁc points. Consider the next problem:</p>
+            \[
+            \left\{
+            \begin{array}{*{3}{rC}l}
+               y'(t) = f(t,y(t)), a \leq t \leq b \\                
+               y(\alpha) = \alpha_0 \\
+            \end{array}
+            \right.
+            \]
+
+            <p>Using The difference equation or forward equation of the Runge-Kutta method of order 4 is given by:</p>
+            
+            <ul>
+                <li>\(h=\cfrac{b-a}{M}\)</li>
+                <li>\(w_0=\alpha_0\)</li>
+
+                <li>\(w_{i+1}=w_i+\cfrac{h}{6}[k_1+2k_2+2k_3+k_4]\), \(i=0, ..., n-1\).</li>
+                <p>Where:</p>
+                <li>\(k1=f(t_i,w_i)\)</li>
+                <li>\(k2=f(t_i+\cfrac{h}{2},w_i+\cfrac{h}{2}k_1)\)</li>
+                <li>\(k3=f(t_i+\cfrac{h}{2},w_i+\cfrac{h}{2}k_2)\)</li>
+                <li>\(k4=f(t_{i+1},w_i+h k_3)\)</li>
+            </ul>
+        </div>
+
+        <div>
+            <b>PARAMS.</b>
+            Remember that we want resolve the differential equation, so consider the next paramas: 
+            <ul>
+                <li><b>ED: </b>There is the function \(f(t,y)\), if you use variables different of \((t,y)\), method comes going errors.</li>
+                <li><b>A: </b>Lower limit in [<b>a</b>,b].</li>
+                <li><b>B: </b>Upper limit in [a,<b>b</b>].</li>
+                <li><b>Z: </b>Initial condition in your problem: \(\alpha_0\).</li>
+                <li><b>M: </b>Step size, remember that \(M=\cfrac{b-a}{h}\).</li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <div class="ftrtxt">
+        <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya &#9887;</p>
+    </div>
+
+</body>
+</html>
+
+
+{% endblock content %}

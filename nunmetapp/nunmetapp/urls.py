@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('user.urls')),
     path('', include('bisect_app.urls')),
     path('', include('jacobi.urls')),
+    path('', include('rk4.urls')),
 ]

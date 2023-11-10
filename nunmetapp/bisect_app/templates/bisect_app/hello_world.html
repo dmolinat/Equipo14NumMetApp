@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Botón de Saludo</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Mostrar Saludo</button>
+    </form>
+    
+    {% if show_message %}
+    <div id="messageDiv">Hola Mundo</div>
+    {% endif %}
+</body>
+</html>

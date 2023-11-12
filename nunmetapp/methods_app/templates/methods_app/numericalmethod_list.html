@@ -25,7 +25,6 @@
             <a href="{% url 'login'  %}">Login</a>
         {% endif %}
         </div>
-        <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
 
         <div id="search-add-wrapper">
             <a id="add-link" href="{% url 'bisectoutput-create' %}">Bisect</a>
@@ -33,6 +32,14 @@
             <a id="add-link" href="{% url 'jacobi-create' %}">Jacobi</a>
             <a id="add-link" href="{% url 'rk4-create' %}">RK4</a>
         </div>
+        <p>Do you want view something about any methods? Click here and check his section: <a href="{% url 'help'  %}"><b>Help</b></a></p>
+
+        
+        <p> Number of use by method: </p>
+        <p>- <b>Bisect</b> have been used {{ bisect_count }} times.</p>
+        <p>- <b>Jacobi</b> have been used {{ jacobi_count }} times.</p>
+        <p>- <b>Boolerl</b> have been used {{ boolerl_count }} times.</p>
+        <p>- <b>Runge-Kutta 4</b> have been used {{ rk4_count }} times.</p>
         
         <div class="task-items-wrapper">
             {% for method in methods %}

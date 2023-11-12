@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'methods_app',
     'boolerl_app',
     'jacobi',
-    'rk4'
+    'rk4',
+    'cookie'
 ]
 
 MIDDLEWARE = [

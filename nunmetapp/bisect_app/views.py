@@ -11,7 +11,7 @@ from .utils.bisect import bisect
 from methods_app.models import NumericalMethod
 import datetime
 from django.shortcuts import render
-
+from cookie.models import UserCookie,CookieCountMethodUse
 
 class BisectOutputCreate(LoginRequiredMixin, CreateView):
     model = BisectOutput
@@ -61,6 +61,13 @@ class BisectOutputCreate(LoginRequiredMixin, CreateView):
             date_use=datetime.datetime.today()
         )
         methods.save()
+        cookie_query=UserCookie.objects.filter(user=self.request.user)
+        cookie_obj=cookie_query.order_by("date_use").last()
+        if(cookie_obj.cookie_active==True):
+            cookie_method_obj=CookieCountMethodUse.objects.get(method=kind)
+            cookie_method_obj.count+=1
+            cookie_method_obj.save()
+
         return redirect('home')
 
 class BisectOutputList(LoginRequiredMixin, ListView):
@@ -115,6 +122,14 @@ class BisectOutputUpdate(LoginRequiredMixin, UpdateView):
         method_updated.kind=kind
         method_updated.date_use=datetime.datetime.today()
         method_updated.save()
+        
+        cookie_query=UserCookie.objects.filter(user=self.request.user)
+        cookie_obj=cookie_query.order_by("date_use").last()
+        if(cookie_obj.cookie_active==True):
+            cookie_method_obj=CookieCountMethodUse.objects.get(method=kind)
+            cookie_method_obj.count+=1
+            cookie_method_obj.save()
+        
         return redirect('home')
         
 def help_buttom_bisect(request):

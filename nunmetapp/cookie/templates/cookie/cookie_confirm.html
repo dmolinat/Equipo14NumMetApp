@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boole</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+    <link rel="stylesheet" href="{% static '/styles/cookie.css' %}">
+</head>
+<body>
+<div class="header-bar">
+    <h1>Cookies</h1>
+    <a href="{% url 'logout' %}">&#8592; Go Back</a>
+</div>
+
+<div class="card-body">
+    <form method="post" action="">
+        {% csrf_token %}
+        <p>Esta página posee cookies, con el fin de mejorar y potenciar la experiencia de los métodos numéricos dispuestos en la aplicación.</p>
+        <p>¿Estas seguro de que deseas las cookies?</p>
+        <input class="button" type="submit" name="confirm" value="Yes">
+        <input class="button" type="submit" name="confirm" value="No">
+    </form>
+</div>
+<div class="ftrtxt">
+    <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya &#9887;</p>
+</div>
+
+</body>
+</html>
+
+{% endblock content %}

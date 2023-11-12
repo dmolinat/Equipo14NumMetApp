@@ -4,6 +4,7 @@ from bisect_app.models import BisectOutput
 from jacobi.models import Jacobi
 from boolerl_app.models import BoolerlOutput
 from rk4.models import Rk4
+from cookie.models import CookieCountMethodUse
 
 class NumericalMethod(models.Model):
     user = models.ForeignKey(

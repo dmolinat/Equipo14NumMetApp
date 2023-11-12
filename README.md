@@ -17,9 +17,10 @@ Equipo 14: Diseño e Implementación de una aplicación que implementa distinto 
 # Parar correr el proyecto ...
 Escriba en la ventana de comandos (Preferiblemente en git bash o wsl ó linux).
 1. `git clone https://github.com/dmolinat/Equipo14NumMetApp.git`
-2. `cd nunmetapp/`
+2. `cd Equipo14NumMetApp/nunmetapp/`
 3. `poetry shell`
 4. `poetry install`
-5. `python manage.py runserver`
+5. `python manage.py migrate`
+6. `python manage.py runserver`
 
   

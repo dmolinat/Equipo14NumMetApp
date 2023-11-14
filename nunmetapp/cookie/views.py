@@ -44,5 +44,3 @@ def confirm_cookie(request):
             return redirect('logout')
     else:
         return render(request, 'cookie/cookie_confirm.html')
-    
-            

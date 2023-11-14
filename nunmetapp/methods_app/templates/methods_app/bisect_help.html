@@ -1,0 +1,115 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HELP</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/styles/home.css' %}">
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+    </head>
+    <body>
+
+        <div class="header-bar">
+            <div>
+                <a href="{% url 'home' %}"><h1>Hello {{ request.user}}, click me and return home.</h1></a>
+                <a><h2>Bisect Examples.</h1></a>
+            </div>
+        
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login'  %}">Login</a>        
+            {% endif %}        
+        </div>
+
+        <div id="search-add-wrapper">
+            <a id="add-link" href="{% url 'bisect-help' %}">Bisect-Help</a>
+            <a id="add-link" href="{% url 'boolerl-help' %}">Boolerl-Help</a>
+            <a id="add-link" href="{% url 'jacobi-help' %}">Jacobi-Help</a>
+            <a id="add-link" href="{% url 'rk4-help' %}">RK4-Help</a>
+        </div>
+        
+        <hr>
+
+        <p>Are you ready to bisect functions? Click in <a id="add-link" href="{% url 'bisectoutput-create' %}">Bisect.</a></p>
+
+        <hr>
+
+        <div>
+            <b>THEORY.</b>
+            This method have some conditions: 
+            <ul>
+                 <li>\(f\) continuous in \([a, b]\).</li>
+                 <li>(Intermediate Value Theorem): \(f(a)\)*\(f(b)\) \(\leq\) \(0\).</li>
+                 <li>There is only one root in \([a,b]\).</li>
+             </ul>
+        </div>
+    
+        <hr>
+        <div>
+            <b>PARAMS.</b>     
+            <ul>
+                 <li><b>F_s: </b>Function \(f\) to bisect.</li>
+                 <li><b>A: </b>Lower limit to bisect in [<b>a</b>,b].</li>
+                 <li><b>B: </b>Upper limit to bisect in [a,<b>b</b>].</li>
+                 <li><b>Tolerance: </b>Approximation accuracy figures or stopping bisect.</li>
+             </ul>
+        </div>
+
+        <div class="task-items-wrapper">
+            <div class="table-function">
+                <hr>
+                <h3> Example 1: </h3>
+                <p>Supose that you want to find the root with accuracy of 6 figures of function \(f(x)=x^3+50x^2+4x-10\) in the interval \([0,0.5]\): Check if function satisfies IVT: \(f(0)f(0.5)\leq0\).</p>       
+                
+                <p>We write the next params in Bisect Form:</p>
+                <ul>
+                    <li><b>F_s: </b>x**3+50*x**2+4*x-10</li>
+                    <li><b>A: </b>0</li>
+                    <li><b>B: </b>0.5</li>
+                    <li><b>Tolerance: </b>1e-6</li>
+                </ul>
+                <p>Click in the buttom <b>Submit</b>.</p>
+                <ul>
+                    <li>You obtaining a <b>JSON</b> with results: {'root': 0.4074897766113281, 'err': 7.62939453125e-06, 'froot': 1.7837612833915273e-05, 'kind': 'BISECT'}. <b>Root</b> it's your main result in this problem, <b>err</b> it's the absolute error in this aproximation, <b>froot</b> it's \(f(root)\) and <b>kind</b> it's the type of method.</li>
+                    <li><b>root: </b>0.4074897766113281</li>
+                    <li><b>err: </b>7.62939453125e-06</li>
+                    <li><b>froot: </b>1.7837612833915273e-05</li>
+                    <li><b>kind: </b>BISECT</li>
+                </ul>
+                <hr>
+                <h3> Example 2: </h3>
+                <p>Supose that you want to find the root with accuracy of 15 figures of function \(f(x)=\cfrac{tan^{-1}(e^{-2x})}{x^2+2x-1}+x\) in the interval \([-3,-2.5]\): Check if function satisfies IVT: \(f(-3)f(-2.5)\leq0\).</p>       
+                
+                <p>We write the next params in Bisect Form:</p>
+                <ul>
+                    <li><b>F_s: </b>(np.arctan(np.exp(-2*x)))/(x**2+2*x-1)+x</li>
+                    <li><b>A: </b>-3</li>
+                    <li><b>B: </b>-2.5</li>
+                    <li><b>Tolerance: </b>1e-15</li>
+                </ul>
+                <p>Click in the buttom <b>Submit</b>.</p>
+                <ul>
+                    <li>You obtaining a <b>JSON</b> with results: {'root': -2.612223492830394, 'err': 8.881784197001252e-16, 'froot': -7.105427357601002e-15, 'kind': 'BISECT'}. <b>Root</b> it's your main result in this problem, <b>err</b> it's the absolute error in this aproximation, <b>froot</b> it's \(f(root)\) and <b>kind</b> it's the type of method.</li>
+                    <li><b>root: </b>-2.612223492830394</li>
+                    <li><b>err: </b>8.881784197001252e-16</li>
+                    <li><b>froot: </b>-7.105427357601002e-15</li>
+                    <li><b>kind: </b>BISECT</li>
+                </ul>
+                <hr>
+            </div>
+        </div>
+        <p>Are you ready to bisect functions? Click in <a id="add-link" href="{% url 'bisectoutput-create' %}">Bisect.</a></p>
+        <div class="ftrtxt">
+            <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya&#9887;</p>
+        </div>
+    </body>
+</html>
+
+{% endblock content %}

@@ -29,18 +29,18 @@
         </div>
         
         <div id="search-add-wrapper">
-            <a id="add-link" href="{% url 'bisectoutput-create' %}">Bisect-Help</a>
-            <a id="add-link" href="{% url 'boolerloutput-create' %}">Boolerl-Help</a>
-            <a id="add-link" href="{% url 'jacobi-create' %}">Jacobi-Help</a>
-            <a id="add-link" href="{% url 'rk4-create' %}">RK4-Help</a>
+            <a id="add-link" href="{% url 'bisect-help' %}">Bisect-Help</a>
+            <a id="add-link" href="{% url 'boolerl-help' %}">Boolerl-Help</a>
+            <a id="add-link" href="{% url 'jacobi-help' %}">Jacobi-Help</a>
+            <a id="add-link" href="{% url 'rk4-help' %}">RK4-Help</a>
         </div>
-        <p></p>
         <div class="task-items-wrapper">
             <div class="table-function">
+                <p>Do i not know how write F_s or ED in yours method? See the next table:</p>
                 <table>
                     <tr>
                         <th>Mathematic Function</th>
-                        <th>- How do i write Function?: Use Python synta with numpy (np).</th>
+                        <th>- How do i write Function?: Use Python syntax with numpy (np).</th>
                     </tr>
                     <tr>
                         <td>\(0\)</td>
@@ -109,6 +109,18 @@
                     <tr>
                         <td>\( e^{x} \)</td>
                         <td>- np.exp(x) </td>
+                    </tr>
+                    <tr>
+                        <td>\( \cos^{-1}(x) \)</td>
+                        <td>- np.arccos(x) </td>
+                    </tr>
+                    <tr>
+                        <td>\( \sin^{-1}(x) \)</td>
+                        <td>- np.arcsin(x) </td>
+                    </tr>
+                    <tr>
+                        <td>\( \tan^{-1}(x) \)</td>
+                        <td>- np.arctan(x) </td>
                     </tr>
                 </table>
             </div>

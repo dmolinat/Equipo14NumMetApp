@@ -22,8 +22,8 @@ class BisectOutputCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         
         f_s = form.cleaned_data['f_s']        
-        a = int(form.cleaned_data['a'])
-        b = int(form.cleaned_data['b'])
+        a = float(form.cleaned_data['a'])
+        b = float(form.cleaned_data['b'])
         tolerance= float(form.cleaned_data['tolerance'])
         
         # Realiza el cálculo bisect aquí y obtén los resultados
@@ -61,10 +61,11 @@ class BisectOutputCreate(LoginRequiredMixin, CreateView):
             date_use=datetime.datetime.today()
         )
         methods.save()
+        
         cookie_query=UserCookie.objects.filter(user=self.request.user)
         cookie_obj=cookie_query.order_by("date_use").last()
         if(cookie_obj.cookie_active==True):
-            cookie_method_obj=CookieCountMethodUse.objects.get(method=kind)
+            cookie_method_obj=CookieCountMethodUse.objects.get(method="BISECT")
             cookie_method_obj.count+=1
             cookie_method_obj.save()
 
@@ -89,8 +90,8 @@ class BisectOutputUpdate(LoginRequiredMixin, UpdateView):
         bisect_output=BisectOutput.objects.get(id=bisect_id)
         
         f_s = form.cleaned_data['f_s']        
-        a = int(form.cleaned_data['a'])
-        b = int(form.cleaned_data['b'])
+        a = float(form.cleaned_data['a'])
+        b = float(form.cleaned_data['b'])
         tolerance= float(form.cleaned_data['tolerance'])
         
         # Realiza el cálculo bisect aquí y obtén los resultados
@@ -126,17 +127,8 @@ class BisectOutputUpdate(LoginRequiredMixin, UpdateView):
         cookie_query=UserCookie.objects.filter(user=self.request.user)
         cookie_obj=cookie_query.order_by("date_use").last()
         if(cookie_obj.cookie_active==True):
-            cookie_method_obj=CookieCountMethodUse.objects.get(method=kind)
+            cookie_method_obj=CookieCountMethodUse.objects.get(method="BISECT")
             cookie_method_obj.count+=1
             cookie_method_obj.save()
         
         return redirect('home')
-        
-def help_buttom_bisect(request):
-    show_message = request.session.get('show_message', False)
-    if request.method == 'POST':
-        # Cambia el estado del mensaje en función de su estado actual
-        show_message = not show_message
-        request.session['show_message'] = show_message
-            
-    return render(request, 'bisect_app/hello_world.html', {'show_message': show_message})

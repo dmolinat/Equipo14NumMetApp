@@ -64,7 +64,7 @@ class RK4Create(LoginRequiredMixin, CreateView):
         cookie_query=UserCookie.objects.filter(user=self.request.user)
         cookie_obj=cookie_query.order_by("date_use").last()
         if(cookie_obj.cookie_active==True):
-            cookie_method_obj=CookieCountMethodUse.objects.get(method=kind)
+            cookie_method_obj=CookieCountMethodUse.objects.get(method="RK4")
             cookie_method_obj.count+=1
             cookie_method_obj.save()
 
@@ -127,7 +127,7 @@ class RK4Update(LoginRequiredMixin, UpdateView):
         cookie_query=UserCookie.objects.filter(user=self.request.user)
         cookie_obj=cookie_query.order_by("date_use").last()
         if(cookie_obj.cookie_active==True):
-            cookie_method_obj=CookieCountMethodUse.objects.get(method=kind)
+            cookie_method_obj=CookieCountMethodUse.objects.get(method="RK4")
             cookie_method_obj.count+=1
             cookie_method_obj.save()
 

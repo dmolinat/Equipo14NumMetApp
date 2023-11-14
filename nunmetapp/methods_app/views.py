@@ -35,3 +35,15 @@ class MethodsDelete(LoginRequiredMixin, DeleteView):
     
 def HelpMethods(request):
     return render(request, 'methods_app/help.html')
+
+def HelpBisect(request):
+    return render(request, 'methods_app/bisect_help.html')
+
+def HelpBoolerl(request):
+    return render(request, 'methods_app/boolerl_help.html')
+
+def HelpJacobi(request):
+    return render(request, 'methods_app/jacobi_help.html')
+
+def HelpRK4(request):
+    return render(request, 'methods_app/rk4_help.html')

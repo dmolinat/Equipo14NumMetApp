@@ -17,7 +17,9 @@ def jacobi(A, B, x0, tol, max_iter):
             if  err < tol:
                 return (str(x_new),k,err,"JACOBI")
             x = x_new
-        
+        check_nan=np.isnan(x)
+        if(True in list(check_nan) | err>1):
+            return (str(np.zeros(1)),-1,np.finfo(np.float64).eps,"JACOBI-ERROR: Matrix A or Vectors B, x0 or params is not valid.")            
         return (str(x),k,err,"JACOBI")
     except:
         return (str(np.zeros(1)),-1,np.finfo(np.float64).eps,"JACOBI-ERROR: Matrix A or Vectors B, x0 or params is not valid.")

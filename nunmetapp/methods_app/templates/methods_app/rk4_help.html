@@ -1,0 +1,155 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HELP</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/styles/home.css' %}">
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+    </head>
+    <body>
+
+        <div class="header-bar">
+            <div>
+                <a href="{% url 'home' %}"><h1>Hello {{ request.user}}, click me and return home.</h1></a>
+                <a><h2>Runge-Kutta 4 Examples.</h1></a>
+            </div>
+        
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login'  %}">Login</a>        
+            {% endif %}        
+        </div>
+
+        <div id="search-add-wrapper">
+            <a id="add-link" href="{% url 'bisect-help' %}">Bisect-Help</a>
+            <a id="add-link" href="{% url 'boolerl-help' %}">Boolerl-Help</a>
+            <a id="add-link" href="{% url 'jacobi-help' %}">Jacobi-Help</a>
+            <a id="add-link" href="{% url 'rk4-help' %}">RK4-Help</a>
+        </div>
+        
+        <hr>
+
+        <p>Are you ready to resolve Differentials equations? Click in <a id="add-link" href="{% url 'rk4-create' %}">RK4.</a></p>
+
+        <hr>
+
+        <div>
+            <b>THEORY</b>.
+            This method have some conditions: 
+
+            <p>Runge-Kutta methods are built on Taylor's methods but with the advantage that they do not require the evaluation of the derivatives of the function \(f\), since instead, at each step, the function is evaluated at several speciﬁc points. Consider the next problem:</p>
+            \[
+            \left\{
+            \begin{array}{*{3}{rC}l}
+               y'(t) = f(t,y(t)), a \leq t \leq b \\                
+               y(\alpha) = \alpha_0 \\
+            \end{array}
+            \right.
+            \]
+
+            <p>Using The difference equation or forward equation of the Runge-Kutta method of order 4 is given by:</p>
+            
+            <ul>
+                <li>\(h=\cfrac{b-a}{M}\)</li>
+                <li>\(w_0=\alpha_0\)</li>
+
+                <li>\(w_{i+1}=w_i+\cfrac{h}{6}[k_1+2k_2+2k_3+k_4]\), \(i=0, ..., n-1\).</li>
+                <p>Where:</p>
+                <li>\(k1=f(t_i,w_i)\)</li>
+                <li>\(k2=f(t_i+\cfrac{h}{2},w_i+\cfrac{h}{2}k_1)\)</li>
+                <li>\(k3=f(t_i+\cfrac{h}{2},w_i+\cfrac{h}{2}k_2)\)</li>
+                <li>\(k4=f(t_{i+1},w_i+h k_3)\)</li>
+            </ul>
+        </div>
+
+        <div>
+            <b>PARAMS.</b>
+            Remember that we want resolve the differential equation, so consider the next paramas: 
+            <ul>
+                <li><b>ED: </b>There is the function \(f(t,y)\), if you use variables different of \((t,y)\), method comes going errors.</li>
+                <li><b>A: </b>Lower limit in [<b>a</b>,b].</li>
+                <li><b>B: </b>Upper limit in [a,<b>b</b>].</li>
+                <li><b>Z: </b>Initial condition in your problem: \(\alpha_0\).</li>
+                <li><b>M: </b>Step size, remember that \(M=\cfrac{b-a}{h}\). We suggest a \(M\)  such that \(0 \leq h < 1\).</li>
+            </ul>
+        </div>
+
+        <div class="task-items-wrapper">
+            <div class="table-function">
+                <hr>
+                <h3> Example 1: </h3>
+                <p>Supose that you want to resolve the next problem with many accuracy in the interval \([2,10]\): </p>
+                
+                \[
+                \begin{cases}
+                y'+\sin(2x)-e^{y}=0\\
+                y(2)=0.5
+                \end{cases}
+                \]      
+
+                <p><b>Note:</b> We need find \(y'(t) = f(t,y(t))\), so we write the ED of this form: \(y'=e^{y}-\sin(2x)\) and we need a M such thah \(0 < h \leq 1\), so \(M=\cfrac{10-2}{0.8}=10\). Remember that our independent variable is 't', so we replace 'x' with 't'.</p>
+                
+                <p>We write the next params in RK4 Form:</p>
+                <ul>
+                    <li><b>ED: </b>np.exp(y)-np.sin(2*t)</li>
+                    <li><b>A: </b>2</li>
+                    <li><b>B: </b>10</li>
+                    <li><b>Z: </b>0.5</li>
+                    <li><b>M: </b>800</li>
+                </ul>
+                <p>Click in the buttom <b>Submit</b>.</p>
+                <ul>
+                    <li>You obtaining a <b>JSON</b> with results: {'X': '[array([2. , 0.5]), array([2.80000000e+00, 3.03980657e+04]), array([3.6, inf]), array([4.4, inf]), array([5.2, inf]), array([ 6., inf]), array([6.8, inf]), array([7.6, inf]), array([8.4, inf]), array([9.2, inf]), array([10., inf])]', 'kind': 'RK4'}. <b>X</b> it's your main result in this problem a set of points and <b>kind</b> it's the type of method.</li>
+                    <li><b>Aprox: </b>[array([2. , 0.5]), array([2.80000000e+00, 3.03980657e+04]), array([3.6, inf]), array([4.4, inf]), array([5.2, inf]), array([ 6., inf]), array([6.8, inf]), array([7.6, inf]), array([8.4, inf]), array([9.2, inf]), array([10., inf])]</li>
+                    <li><b>kind: </b>RK4</li>
+                    <li><b>Note: </b>If you can obtaining the value of \(y(2.8)=30398.0657\).</li>
+                    
+                </ul>
+                <hr>
+                <h3> Example 2: </h3>
+                <p>Supose that you want to resolve the next problem with many accuracy in the interval \([2,10]\): </p>
+                
+                \[
+                \begin{cases}
+                y'-te^{3t}=-2arctan(y), 0 \leq t \leq 1\\
+                y(0)=0
+                \end{cases}
+                \]      
+
+                <p><b>Note:</b> We need find \(y'(t) = f(t,y(t))\), so we write the ED of this form: \(y'=te^{3t}-2arctan(y)\) and we need a M such thah \(0 < h \leq 1\), so \(M=\cfrac{1-0}{0.01}=100\). Remember that our independent variable is 't', so we replace 'x' with 't'.</p>
+                
+                <p>We write the next params in RK4 Form:</p>
+                <ul>
+                    <li><b>ED: </b>t*np.exp(3*t)-2*np.arctan(y)</li>
+                    <li><b>A: </b>0</li>
+                    <li><b>B: </b>1</li>
+                    <li><b>Z: </b>0</li>
+                    <li><b>M: </b>100</li>
+                </ul>
+                <p>Click in the buttom <b>Submit</b>.</p>
+                <ul>
+                    <li>You obtaining a <b>JSON</b> with results: {'X': '[array([0., 0.]), array([1.00000000e-02, 5.06746652e-05]), array([0.02 , 0.00020546]), array([0.03 , 0.00046866]), array([0.04 , 0.00084475]), array([0.05 , 0.00133847]), array([0.06 , 0.00195473]), array([0.07 , 0.0026987]), array([0.08 , 0.00357577]), array([0.09 , 0.00459159]), array([0.1 , 0.00575206]), array([0.11 , 0.00706333]), array([0.12 , 0.00853185]), array([0.13 , 0.01016434]), array([0.14 , 0.01196783]), array([0.15 , 0.01394964]), array([0.16 , 0.01611742]), array([0.17 , 0.01847916]), array([0.18 , 0.02104316]), array([0.19 , 0.02381813]), array([0.2 , 0.02681312]), array([0.21 , 0.03003755]), array([0.22 , 0.03350129]), array([0.23 , 0.03721458]), array([0.24 , 0.04118812]), array([0.25 , 0.04543306]), array([0.26 , 0.049961]), array([0.27 , 0.05478405]), array([0.28 , 0.05991482]), array([0.29 , 0.06536644]), array([0.3 , 0.07115262]), array([0.31 , 0.0772876]), array([0.32 , 0.08378626]), array([0.33 , 0.09066409]), array([0.34 , 0.09793723]), array([0.35 , 0.1056225]), array([0.36 , 0.11373746]), array([0.37 , 0.12230039]), array([0.38 , 0.13133036]), array([0.39 , 0.14084728]), array([0.4 , 0.1508719]), array([0.41 , 0.16142589]), array([0.42 , 0.17253188]), array([0.43 , 0.18421349]), array([0.44 , 0.19649541]), array([0.45 , 0.20940345]), array([0.46 , 0.22296461]), array([0.47 , 0.23720713]), array([0.48 , 0.25216058]), array([0.49 , 0.26785593]), array([0.5 , 0.28432567]), array([0.51 , 0.30160383]), array([0.52 , 0.31972617]), array([0.53 , 0.33873021]), array([0.54 , 0.35865539]), array([0.55 , 0.37954317]), array([0.56 , 0.40143717]), array([0.57 , 0.42438331]), array([0.58 , 0.44842995]), array([0.59 , 0.47362803]), array([0.6 , 0.50003126]), array([0.61 , 0.52769627]), array([0.62 , 0.55668279]), array([0.63 , 0.58705379]), array([0.64 , 0.61887574]), array([0.65 , 0.65221872]), array([0.66 , 0.68715664]), array([0.67 , 0.72376742]), array([0.68 , 0.76213319]), array([0.69 , 0.80234044]), array([0.7 , 0.84448022]), array([0.71 , 0.88864832]), array([0.72 , 0.9349454]), array([0.73 , 0.9834772]), array([0.74 , 1.03435465]), array([0.75 , 1.08769401]), array([0.76 , 1.14361705]), array([0.77 , 1.20225113]), array([0.78 , 1.26372934]), array([0.79 , 1.32819062]), array([0.8 , 1.39577987]), array([0.81 , 1.46664805]), array([0.82 , 1.54095232]), array([0.83 , 1.6188561]), array([0.84 , 1.70052923]), array([0.85 , 1.78614808]), array([0.86 , 1.87589566]), array([0.87 , 1.96996178]), array([0.88 , 2.06854317]), array([0.89 , 2.17184368]), array([0.9 , 2.28007438]), array([0.91 , 2.39345384]), array([0.92 , 2.51220824]), array([0.93 , 2.63657163]), array([0.94 , 2.76678616]), array([0.95 , 2.90310232]), array([0.96 , 3.04577919]), array([0.97 , 3.19508473]), array([0.98 , 3.35129608]), array([0.99 , 3.51469986]), array([1. , 3.6855925])]', 'kind': 'RK4'}. <b>X</b> it's your main result in this problem a set of 100 points and <b>kind</b> it's the type of method.</li>
+                    <li><b>Aprox: </b>[array([0., 0.]), array([1.00000000e-02, 5.06746652e-05]), array([0.02 , 0.00020546]), array([0.03 , 0.00046866]), array([0.04 , 0.00084475]), array([0.05 , 0.00133847]), array([0.06 , 0.00195473]), array([0.07 , 0.0026987]), array([0.08 , 0.00357577]), array([0.09 , 0.00459159]), array([0.1 , 0.00575206]), array([0.11 , 0.00706333]), array([0.12 , 0.00853185]), array([0.13 , 0.01016434]), array([0.14 , 0.01196783]), array([0.15 , 0.01394964]), array([0.16 , 0.01611742]), array([0.17 , 0.01847916]), array([0.18 , 0.02104316]), array([0.19 , 0.02381813]), array([0.2 , 0.02681312]), array([0.21 , 0.03003755]), array([0.22 , 0.03350129]), array([0.23 , 0.03721458]), array([0.24 , 0.04118812]), array([0.25 , 0.04543306]), array([0.26 , 0.049961]), array([0.27 , 0.05478405]), array([0.28 , 0.05991482]), array([0.29 , 0.06536644]), array([0.3 , 0.07115262]), array([0.31 , 0.0772876]), array([0.32 , 0.08378626]), array([0.33 , 0.09066409]), array([0.34 , 0.09793723]), array([0.35 , 0.1056225]), array([0.36 , 0.11373746]), array([0.37 , 0.12230039]), array([0.38 , 0.13133036]), array([0.39 , 0.14084728]), array([0.4 , 0.1508719]), array([0.41 , 0.16142589]), array([0.42 , 0.17253188]), array([0.43 , 0.18421349]), array([0.44 , 0.19649541]), array([0.45 , 0.20940345]), array([0.46 , 0.22296461]), array([0.47 , 0.23720713]), array([0.48 , 0.25216058]), array([0.49 , 0.26785593]), array([0.5 , 0.28432567]), array([0.51 , 0.30160383]), array([0.52 , 0.31972617]), array([0.53 , 0.33873021]), array([0.54 , 0.35865539]), array([0.55 , 0.37954317]), array([0.56 , 0.40143717]), array([0.57 , 0.42438331]), array([0.58 , 0.44842995]), array([0.59 , 0.47362803]), array([0.6 , 0.50003126]), array([0.61 , 0.52769627]), array([0.62 , 0.55668279]), array([0.63 , 0.58705379]), array([0.64 , 0.61887574]), array([0.65 , 0.65221872]), array([0.66 , 0.68715664]), array([0.67 , 0.72376742]), array([0.68 , 0.76213319]), array([0.69 , 0.80234044]), array([0.7 , 0.84448022]), array([0.71 , 0.88864832]), array([0.72 , 0.9349454]), array([0.73 , 0.9834772]), array([0.74 , 1.03435465]), array([0.75 , 1.08769401]), array([0.76 , 1.14361705]), array([0.77 , 1.20225113]), array([0.78 , 1.26372934]), array([0.79 , 1.32819062]), array([0.8 , 1.39577987]), array([0.81 , 1.46664805]), array([0.82 , 1.54095232]), array([0.83 , 1.6188561]), array([0.84 , 1.70052923]), array([0.85 , 1.78614808]), array([0.86 , 1.87589566]), array([0.87 , 1.96996178]), array([0.88 , 2.06854317]), array([0.89 , 2.17184368]), array([0.9 , 2.28007438]), array([0.91 , 2.39345384]), array([0.92 , 2.51220824]), array([0.93 , 2.63657163]), array([0.94 , 2.76678616]), array([0.95 , 2.90310232]), array([0.96 , 3.04577919]), array([0.97 , 3.19508473]), array([0.98 , 3.35129608]), array([0.99 , 3.51469986]), array([1. , 3.6855925])]</li>
+                    <li><b>kind: </b>RK4</li>
+                    <li><b>Note: </b>If you can obtaining the value of \(y(0.2)=0.02681312\).</li>
+                    
+                </ul>
+                <hr>
+            </div>
+        </div>
+        <p>Are you ready to resolve Differentials equations? Click in <a id="add-link" href="{% url 'rk4-create' %}">RK4.</a></p>
+        <div class="ftrtxt">
+            <p>&#9886; by Equipo 14: David Garcia Blandón; David Andrés Cano Gonzales; Denilson Andrés Molina Truyot; Sebastian Gaviria Montoya&#9887;</p>
+        </div>
+    </body>
+</html>
+
+{% endblock content %}

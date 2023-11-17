@@ -7,10 +7,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.shortcuts import render
 
+from cookie.views import start_cookie
+
 def home(request):
     return render(request, 'index.html')
 
 class CustomLoginView(LoginView):
+    start_cookie()
     template_name = 'base/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
@@ -19,6 +22,7 @@ class CustomLoginView(LoginView):
         return reverse_lazy('confirm-cookie')
 
 class RegisterPage(FormView):
+    start_cookie()
     template_name = 'base/register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True

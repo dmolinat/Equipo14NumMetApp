@@ -44,3 +44,28 @@ def confirm_cookie(request):
             return redirect('logout')
     else:
         return render(request, 'cookie/cookie_confirm.html')
+    
+def start_cookie():
+    count=CookieCountMethodUse.objects.all()
+    n=len(list(count))
+    if(n==0):
+        try:
+            CookieCountMethodUse(
+                method="BISECT",
+                count=0
+            ).save()
+            CookieCountMethodUse(
+                method="BOOLERL",
+                count=0
+            ).save()
+            CookieCountMethodUse(
+                method="JACOBI",
+                count=0
+            ).save()
+            CookieCountMethodUse(
+                method="RK4",
+                count=0
+            ).save()
+            return True
+        except:
+            return False

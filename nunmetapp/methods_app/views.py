@@ -6,9 +6,12 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from .models import NumericalMethod
 from cookie.models import CookieCountMethodUse
+
+from cookie.views import start_cookie
     
 """Vistas para los elementos de methods"""
 class MethodsList(LoginRequiredMixin, ListView):
+    start_cookie()
     model = NumericalMethod
     context_object_name ='methods'
     ordering = ['date_use']

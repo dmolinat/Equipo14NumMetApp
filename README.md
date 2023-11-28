@@ -8,6 +8,7 @@ Equipo 14: Diseño e Implementación de una aplicación que implementa distinto 
 
 # Drive para diagramas y casos de uso.
 - https://drive.google.com/drive/u/0/folders/0ALIvuvhHAbJ-Uk9PVA
+* Allí encontrará los draw.io en caso de que en el trabajo ni en la imagen de la carpeta *Graficos* se observe bien.
 
 # Requerimientos para cargar el proyecto.
 - Poseer python, 3.10 >=.
